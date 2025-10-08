@@ -1,7 +1,0 @@
-- [x] Create main.py script for daily commit logic
-- [x] Create requirements.txt for dependencies
-- [x] Create .env.example template
-- [x] Create README.md with setup instructions
-- [x] Install dependencies using pip
-- [x] Test the script manually
-- [x] Set up Windows Task Scheduler for daily execution

@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from git import Repo
 from datetime import datetime
 import random
+import socket
 
 # Load environment variables
 load_dotenv()
@@ -14,6 +15,19 @@ LOCAL_REPO_PATH = os.getenv('LOCAL_REPO_PATH')
 
 if not all([GITHUB_TOKEN, GITHUB_USERNAME, REPO_NAME, LOCAL_REPO_PATH]):
     raise ValueError("Missing required environment variables. Please check your .env file.")
+
+# Check internet connection
+def is_connected():
+    try:
+        socket.create_connection(("8.8.8.8", 53))
+        return True
+    except OSError:
+        pass
+    return False
+
+if not is_connected():
+    print("No internet connection. Exiting.")
+    exit(0)
 
 # Initialize the repository
 repo = Repo(LOCAL_REPO_PATH)
@@ -29,8 +43,11 @@ if repo.head.is_valid():
 else:
     print("No commits yet. Proceeding with first commit.")
 
-# Number of commits: random between 8 and 10
-num_commits = random.randint(8, 10)
+# To make it run automatically, we can add a loop or schedule, but for now, ensure it runs daily
+# For automatic, the user needs to schedule this script to run daily, e.g., using Windows Task Scheduler
+
+# Number of commits: random between 6 and 10
+num_commits = random.randint(6, 10)
 print(f"Making {num_commits} commits today.")
 
 # Update remote URL with token for authentication

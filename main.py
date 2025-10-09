@@ -29,8 +29,8 @@ if repo.head.is_valid():
 else:
     print("No commits yet. Proceeding with first commit.")
 
-# Number of commits: random between 6 and 8
-num_commits = random.randint(6, 8)
+# Number of commits: random between 8 and 10
+num_commits = random.randint(8, 10)
 print(f"Making {num_commits} commits today.")
 
 # Update remote URL with token for authentication

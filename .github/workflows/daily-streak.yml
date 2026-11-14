@@ -1,0 +1,40 @@
+name: Daily Contribution Streak Automation
+
+on:
+  schedule:
+    # Runs at 04:30 UTC (10:00 AM IST) every single day
+    - cron: '30 4 * * *'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  maintain-streak:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Configure Git Identity
+        run: |
+          git config --global user.name "Aditya Pratap Singh"
+          git config --global user.email "aps4934@users.noreply.github.com"
+
+      - name: Execute Daily Commit Bot (20-40 commits)
+        env:
+          MIN_COMMITS: 20
+          MAX_COMMITS: 40
+        run: python auto_streak.py --no-push
+
+      - name: Push Commits to GitHub
+        run: |
+          git push origin HEAD:master

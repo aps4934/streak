@@ -46,8 +46,8 @@ else:
 # To make it run automatically, we can add a loop or schedule, but for now, ensure it runs daily
 # For automatic, the user needs to schedule this script to run daily, e.g., using Windows Task Scheduler
 
-# Number of commits: random between 6 and 10
-num_commits = random.randint(6, 10)
+# Number of commits: random between 20 and 40
+num_commits = random.randint(20, 40)
 print(f"Making {num_commits} commits today.")
 
 # Update remote URL with token for authentication
